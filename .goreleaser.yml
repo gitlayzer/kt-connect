@@ -7,7 +7,6 @@ before:
   hooks:
     - make mod
     - bash build/scripts/wintun.sh
-    - bash build/scripts/docker.sh
 builds:
   - id: "ktctl"
     main: ./cmd/ktctl/main.go
@@ -22,24 +21,8 @@ builds:
       - arm64
     env:
       - CGO_ENABLED=0
-  - id: "shadow"
-    main: ./cmd/shadow/main.go
-    binary: artifacts/shadow/shadow-linux-amd64
-    goos:
-      - linux
-    goarch:
-      - amd64
-  - id: "router"
-    main: ./cmd/router/main.go
-    binary: artifacts/router/router-linux-amd64
-    goos:
-      - linux
-    goarch:
-      - amd64
 archives:
   - id: ktctl
-    builds:
-      - ktctl
     name_template: 'ktctl_{{ .Version }}_{{ .Os | title }}_{{ .Arch | replace "386" "i386" | replace "amd64" "x86_64" | replace "arm64" "arm_64" }}'
     formats:
       - tar.gz
