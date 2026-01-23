@@ -2,14 +2,16 @@ package cluster
 
 import (
 	"fmt"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	appV1 "k8s.io/api/apps/v1"
 	coreV1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+	"strconv"
+	"strings"
 )
 
 func getKubernetesClient(kubeConfig string) (clientset *kubernetes.Clientset, err error) {
@@ -18,6 +20,31 @@ func getKubernetesClient(kubeConfig string) (clientset *kubernetes.Clientset, er
 		return nil, err
 	}
 	clientset, err = kubernetes.NewForConfig(config)
+	if err != nil {
+		return nil, err
+	}
+
+	// Check Kubernetes version
+	info, err := clientset.Discovery().ServerVersion()
+	if err != nil {
+		return nil, err
+	}
+
+	// Clean minor version string (remove + and other non-numeric chars)
+	minorStr := info.Minor
+	if idx := strings.IndexFunc(minorStr, func(r rune) bool { return !('0' <= r && r <= '9') }); idx != -1 {
+		minorStr = minorStr[:idx]
+	}
+
+	minor, err := strconv.Atoi(minorStr)
+	if err != nil {
+		return nil, fmt.Errorf("failed to parse kubernetes server version: %s.%s", info.Major, info.Minor)
+	}
+
+	if info.Major != "1" || minor < 28 {
+		return nil, fmt.Errorf("kubernetes cluster version %s.%s is not supported. Please use version 1.28 or later", info.Major, info.Minor)
+	}
+
 	return
 }
 

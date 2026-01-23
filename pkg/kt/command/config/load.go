@@ -2,7 +2,7 @@ package config
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"io/ioutil"

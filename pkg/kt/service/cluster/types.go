@@ -1,7 +1,7 @@
 package cluster
 
 import (
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
 	appV1 "k8s.io/api/apps/v1"
 	coreV1 "k8s.io/api/core/v1"
 	extV1 "k8s.io/api/extensions/v1beta1"
@@ -22,8 +22,6 @@ type KubernetesInterface interface {
 	WaitPodTerminate(name, namespace string) (*coreV1.Pod, error)
 	WatchPod(name, namespace string, fAdd, fDel, fMod func(*coreV1.Pod))
 	ExecInPod(containerName, podName, namespace string, cmd ...string) (string, string, error)
-	AddEphemeralContainer(containerName, podName string, envs map[string]string) (string, error)
-	RemoveEphemeralContainer(containerName, podName string, namespace string) error
 	IncreasePodRef(name ,namespace string) error
 	DecreasePodRef(name, namespace string) (bool, error)
 

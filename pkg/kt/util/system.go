@@ -2,7 +2,7 @@ package util
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/common"
+	"github.com/gitlayzer/kt-connect/pkg/common"
 	"github.com/rs/zerolog/log"
 	"io/ioutil"
 	"os"

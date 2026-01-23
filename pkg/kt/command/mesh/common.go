@@ -1,7 +1,7 @@
 package mesh
 
 import (
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"regexp"
 	"strings"

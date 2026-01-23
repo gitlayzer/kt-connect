@@ -7,5 +7,5 @@
 - **Local** ⇋ **Cluster**
 - (with KT-Bidirectional-Channel)
 
-[Github](https://github.com/alibaba/kt-connect)
+[Github](https://github.com/gitlayzer/kt-connect)
 [QuickStart](/en-us/quickstart)

@@ -2,10 +2,10 @@ package mesh
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/kt/command/general"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/service/cluster"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/cluster"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	coreV1 "k8s.io/api/core/v1"
 	k8sErrors "k8s.io/apimachinery/pkg/api/errors"

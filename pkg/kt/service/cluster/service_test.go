@@ -1,7 +1,7 @@
 package cluster
 
 import (
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	testclient "k8s.io/client-go/kubernetes/fake"
 	"testing"
 )

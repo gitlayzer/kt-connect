@@ -2,9 +2,9 @@ package command
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/kt/command/clean"
-	"github.com/alibaba/kt-connect/pkg/kt/command/general"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/clean"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"strings"

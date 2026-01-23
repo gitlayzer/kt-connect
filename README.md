@@ -1,13 +1,13 @@
 KT-Connect
 ===========
 
-![Go](https://github.com/alibaba/kt-connect/workflows/Go/badge.svg)
-[![Build Status](https://travis-ci.org/alibaba/kt-connect.svg?branch=master)](https://travis-ci.org/alibaba/kt-connect)
-[![Go Report Card](https://goreportcard.com/badge/github.com/alibaba/kt-connect)](https://goreportcard.com/report/github.com/alibaba/kt-connect)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/test_coverage)](https://codeclimate.com/github/alibaba/kt-connect/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/maintainability)](https://codeclimate.com/github/alibaba/kt-connect/maintainability)
-[![Release](https://img.shields.io/github/release/alibaba/kt-connect.svg?style=flat-square)](https://img.shields.io/github/release/alibaba/kt-connect.svg?style=flat-square)
-![License](https://img.shields.io/github/license/alibaba/kt-connect.svg)
+![Go](https://github.com/gitlayzer/kt-connect/workflows/Go/badge.svg)
+[![Build Status](https://travis-ci.org/gitlayzer/kt-connect.svg?branch=master)](https://travis-ci.org/gitlayzer/kt-connect)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gitlayzer/kt-connect)](https://goreportcard.com/report/github.com/gitlayzer/kt-connect)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/test_coverage)](https://codeclimate.com/github/gitlayzer/kt-connect/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/maintainability)](https://codeclimate.com/github/gitlayzer/kt-connect/maintainability)
+[![Release](https://img.shields.io/github/release/gitlayzer/kt-connect.svg?style=flat-square)](https://img.shields.io/github/release/gitlayzer/kt-connect.svg?style=flat-square)
+![License](https://img.shields.io/github/license/gitlayzer/kt-connect.svg)
 
 English | [简体中文](./README_CN.md)
 
@@ -30,7 +30,5 @@ Read the [Quick Start Guide](docs/en-us/guide/quickstart.md) for more about this
 
 ## 💡 Ask For Help
 
-Please feel free to raise an [issue](https://github.com/alibaba/kt-connect/issues) if anything sucks, or go ahead to contact us with DingTalk（钉钉）:
-
-<img src="https://img.alicdn.com/imgextra/i4/O1CN01sTW3D61NzAFgUCNqz_!!6000000001640-0-tps-573-657.jpg" width="50%"></img>
+Please feel free to raise an [issue](https://github.com/gitlayzer/kt-connect/issues) if anything sucks.
 

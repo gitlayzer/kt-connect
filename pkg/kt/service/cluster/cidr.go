@@ -3,8 +3,8 @@ package cluster
 import (
 	"context"
 	"fmt"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"

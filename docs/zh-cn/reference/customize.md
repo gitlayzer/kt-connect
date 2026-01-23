@@ -20,7 +20,7 @@
 首先下载`kt-connect`的源码仓库，然后进入代码目录（如果已经下载过源码仓库，直接`git pull`更新即可）：
 
 ```bash
-git clone https://github.com/alibaba/kt-connect.git
+git clone https://github.com/gitlayzer/kt-connect.git
 cd kt-connect
 ```
 
@@ -55,7 +55,7 @@ make upx
 
 Windows环境下的Make工具使用起来相对繁琐，建议采用下述原始命令方式打包。
 
-如需进行更精细的编译控制，也可以直接使用`go`和`upx`命令来完成打包，具体命令可以参考[Makefile](https://github.com/alibaba/kt-connect/blob/master/Makefile)中的`ktctl`和`upx`任务。
+如需进行更精细的编译控制，也可以直接使用`go`和`upx`命令来完成打包，具体命令可以参考[Makefile](https://github.com/gitlayzer/kt-connect/blob/master/Makefile)中的`ktctl`和`upx`任务。
 
 其中包含三个配置变量：
 

@@ -2,10 +2,10 @@ package command
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/kt/command/birdseye"
-	"github.com/alibaba/kt-connect/pkg/kt/command/general"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/birdseye"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"strings"

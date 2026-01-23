@@ -20,7 +20,7 @@ It is not difficult to directly modify the source code to achieve the above purp
 Firstly, download the source code repository of `kt-connect`, and then enter the code directory (if you have already downloaded the source code repository, just update it with `git pull`):
 
 ```bash
-git clone https://github.com/alibaba/kt-connect.git
+git clone https://github.com/gitlayzer/kt-connect.git
 cd kt-connect
 ````
 
@@ -55,7 +55,7 @@ After execution, binary files for MacOS/Linux/Windows systems will be generated 
 
 The Make toolkit in the Windows environment is relatively cumbersome to use, it is recommended to use below raw commands to create the executable binary.
 
-For more precise compilation control, you can also directly use the `go` and `upx` commands to complete the packaging. For more details, please refer to the `ktctl` and `upx` tasks in [Makefile](https://github.com/alibaba/kt-connect/blob/master/Makefile).
+For more precise compilation control, you can also directly use the `go` and `upx` commands to complete the packaging. For more details, please refer to the `ktctl` and `upx` tasks in [Makefile](https://github.com/gitlayzer/kt-connect/blob/master/Makefile).
 
 It contains three configurable variables:
 

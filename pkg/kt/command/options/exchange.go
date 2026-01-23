@@ -1,6 +1,6 @@
 package options
 
-import "github.com/alibaba/kt-connect/pkg/kt/util"
+import "github.com/gitlayzer/kt-connect/pkg/kt/util"
 
 func ExchangeFlags() []OptionConfig {
 	flags := []OptionConfig{

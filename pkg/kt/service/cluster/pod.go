@@ -4,8 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"io"
 	coreV1 "k8s.io/api/core/v1"
@@ -126,7 +126,7 @@ func (k *Kubernetes) ExecInPod(containerName, podName, namespace string, cmd ...
 	stderrMsg := util.RemoveColor(strings.TrimSpace(stderr.String()))
 	rawErrMsg := util.ExtractErrorMessage(stderrMsg)
 	if err == nil && rawErrMsg != "" {
-		err = fmt.Errorf(rawErrMsg)
+		err = fmt.Errorf("%s", rawErrMsg)
 	}
 	return stdoutMsg, stderrMsg, err
 }

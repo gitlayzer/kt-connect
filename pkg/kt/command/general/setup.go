@@ -2,11 +2,12 @@ package general
 
 import (
 	"fmt"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/service/cluster"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/cluster"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	"context"
 	k8sRuntime "k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -44,8 +45,8 @@ func SetupLogger() {
 		zerolog.SetGlobalLevel(zerolog.DebugLevel)
 	}
 	util.PrepareLogger(opt.Get().Global.Debug)
-	k8sRuntime.ErrorHandlers = []func(error){
-		func(err error) {
+	k8sRuntime.ErrorHandlers = []k8sRuntime.ErrorHandler{
+		func(ctx context.Context, err error, msg string, keysAndValues ...interface{}) {
 			_, _ = util.BackgroundLogger.Write([]byte(err.Error() + util.Eol))
 		},
 	}

@@ -1,13 +1,13 @@
 KT-Connect
 ===========
 
-![Go](https://github.com/alibaba/kt-connect/workflows/Go/badge.svg)
-[![Build Status](https://travis-ci.org/alibaba/kt-connect.svg?branch=master)](https://travis-ci.org/alibaba/kt-connect)
-[![Go Report Card](https://goreportcard.com/badge/github.com/alibaba/kt-connect)](https://goreportcard.com/report/github.com/alibaba/kt-connect)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/test_coverage)](https://codeclimate.com/github/alibaba/kt-connect/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/maintainability)](https://codeclimate.com/github/alibaba/kt-connect/maintainability)
-[![Release](https://img.shields.io/github/release/alibaba/kt-connect.svg?style=flat-square)](https://img.shields.io/github/release/alibaba/kt-connect.svg?style=flat-square)
-![License](https://img.shields.io/github/license/alibaba/kt-connect.svg)
+![Go](https://github.com/gitlayzer/kt-connect/workflows/Go/badge.svg)
+[![Build Status](https://travis-ci.org/gitlayzer/kt-connect.svg?branch=master)](https://travis-ci.org/gitlayzer/kt-connect)
+[![Go Report Card](https://goreportcard.com/badge/github.com/gitlayzer/kt-connect)](https://goreportcard.com/report/github.com/gitlayzer/kt-connect)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/test_coverage)](https://codeclimate.com/github/gitlayzer/kt-connect/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/maintainability)](https://codeclimate.com/github/gitlayzer/kt-connect/maintainability)
+[![Release](https://img.shields.io/github/release/gitlayzer/kt-connect.svg?style=flat-square)](https://img.shields.io/github/release/gitlayzer/kt-connect.svg?style=flat-square)
+![License](https://img.shields.io/github/license/gitlayzer/kt-connect.svg)
 
 [English](./README.md) | 简体中文
 
@@ -30,6 +30,4 @@ KtConnect（Kt为Kubernetes Toolkit集群工具包的简写）是一款基于Kub
 
 ## 💡 寻求帮助
 
-请将遇到的问题描述提交到[Github Issue](https://github.com/alibaba/kt-connect/issues)，或直接加入钉钉群联系项目开发者：
-
-<img src="https://img.alicdn.com/imgextra/i4/O1CN01sTW3D61NzAFgUCNqz_!!6000000001640-0-tps-573-657.jpg" width="50%"></img>
+请将遇到的问题描述提交到[Github Issue](https://github.com/gitlayzer/kt-connect/issues)。

@@ -1,7 +1,7 @@
 package general
 
 import (
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
 	"github.com/spf13/cobra"
 )
 

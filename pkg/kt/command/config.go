@@ -1,9 +1,9 @@
 package command
 
 import (
-	"github.com/alibaba/kt-connect/pkg/kt/command/config"
-	"github.com/alibaba/kt-connect/pkg/kt/command/general"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/config"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
 	"github.com/spf13/cobra"
 )
 

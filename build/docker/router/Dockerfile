@@ -1,4 +1,4 @@
-FROM nginx:1.21
+FROM nginx:1.25
 
 COPY build/docker/router/nginx.conf /etc/nginx/nginx.conf
 COPY artifacts/router/router-linux-amd64 /usr/sbin/router

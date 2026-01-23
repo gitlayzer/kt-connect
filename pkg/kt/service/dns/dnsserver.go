@@ -2,10 +2,10 @@ package dns
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/common"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/service/cluster"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/common"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/cluster"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/miekg/dns"
 	"github.com/rs/zerolog/log"
 	"net"
@@ -43,7 +43,7 @@ func getIngressDomains() map[string]string {
 		return map[string]string{}
 	}
 	if !util.IsValidIp(opt.Get().Connect.IngressIp) {
-		log.Warn().Msgf("Ingress Ip '" + opt.Get().Connect.IngressIp + "' is invalid")
+		log.Warn().Msgf("Ingress Ip '%s' is invalid", opt.Get().Connect.IngressIp)
 		return map[string]string{}
 	}
 	ingressDomains := make(map[string]string)
@@ -53,7 +53,7 @@ func getIngressDomains() map[string]string {
 		for _, ingress := range ingresses.Items {
 			for _, rule := range ingress.Spec.Rules {
 				if rule.Host != "" {
-					log.Debug().Msgf("Find ingress domain " + rule.Host)
+					log.Debug().Msgf("Find ingress domain %s", rule.Host)
 					ingressDomains[rule.Host] = opt.Get().Connect.IngressIp
 				}
 			}

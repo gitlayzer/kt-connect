@@ -3,8 +3,8 @@ package dnsserver
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/common"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/common"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/miekg/dns"
 	"github.com/rs/zerolog/log"
 	"net"
@@ -139,7 +139,7 @@ func (s *DnsServer) fetchAllPossibleDomains(name string) []string {
 // suffixes[2] = cluster.local
 func (s *DnsServer) getSuffixes() (suffixes []string) {
 	for _, s := range s.config.Search {
-		// @see https://github.com/alibaba/kt-connect/issues/153
+		// @see https://github.com/gitlayzer/kt-connect/issues/153
 		if strings.HasSuffix(s, ".") {
 			suffixes = append(suffixes, s)
 		} else {
@@ -170,7 +170,7 @@ func (s *DnsServer) lookup(domain string, qtype uint16, name string) ([]dns.RR, 
 	res, err := common.NsLookup(domain, qtype, "udp", address)
 	if err != nil {
 		if common.IsDomainNotExist(err) {
-			log.Debug().Msgf(err.Error())
+			log.Debug().Msgf("%s", err.Error())
 		} else {
 			log.Warn().Err(err).Msgf("Failed to answer name %s (%d) query for %s", name, qtype, domain)
 		}

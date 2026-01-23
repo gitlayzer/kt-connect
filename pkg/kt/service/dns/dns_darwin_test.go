@@ -1,7 +1,7 @@
 package dns
 
 import (
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/stretchr/testify/require"
 	"testing"
 )

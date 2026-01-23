@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/router"
+	"github.com/gitlayzer/kt-connect/pkg/router"
 	"github.com/gofrs/flock"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

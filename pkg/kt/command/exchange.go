@@ -2,10 +2,10 @@ package command
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/kt/command/exchange"
-	"github.com/alibaba/kt-connect/pkg/kt/command/general"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/exchange"
+	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"github.com/spf13/cobra"
 	"strings"
@@ -51,13 +51,11 @@ func Exchange(resourceName string) error {
 	log.Info().Msgf("Using %s mode", opt.Get().Exchange.Mode)
 	if opt.Get().Exchange.Mode == util.ExchangeModeScale {
 		err = exchange.ByScale(resourceName)
-	} else if opt.Get().Exchange.Mode == util.ExchangeModeEphemeral {
-		err = exchange.ByEphemeralContainer(resourceName)
 	} else if opt.Get().Exchange.Mode == util.ExchangeModeSelector {
 		err = exchange.BySelector(resourceName)
 	} else {
-		err = fmt.Errorf("invalid exchange method '%s', supportted are %s, %s, %s", opt.Get().Exchange.Mode,
-			util.ExchangeModeSelector, util.ExchangeModeScale, util.ExchangeModeEphemeral)
+		err = fmt.Errorf("invalid exchange method '%s', supportted are %s, %s", opt.Get().Exchange.Mode,
+			util.ExchangeModeSelector, util.ExchangeModeScale)
 	}
 	if err != nil {
 		return err

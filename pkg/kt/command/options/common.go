@@ -1,7 +1,7 @@
 package options
 
 import (
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/spf13/cobra"
 )
 

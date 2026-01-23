@@ -3,11 +3,11 @@ package general
 import (
 	"encoding/json"
 	"fmt"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/service/cluster"
-	"github.com/alibaba/kt-connect/pkg/kt/service/dns"
-	"github.com/alibaba/kt-connect/pkg/kt/service/tun"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/cluster"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/dns"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/tun"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"os"
 	"os/signal"
@@ -230,15 +230,6 @@ func cleanShadowPodAndConfigMap() {
 				}
 				if err != nil {
 					log.Error().Err(err).Msgf("Delete shadow pod %s failed", shadow)
-				}
-			}
-		}
-		if opt.Get().Exchange.Mode == util.ExchangeModeEphemeral {
-			for _, shadow := range strings.Split(opt.Store.Shadow, ",") {
-				log.Info().Msgf("Removing ephemeral container of pod %s", shadow)
-				err = cluster.Ins().RemoveEphemeralContainer(util.KtExchangeContainer, shadow, opt.Get().Global.Namespace)
-				if err != nil {
-					log.Error().Err(err).Msgf("Remove ephemeral container of pod %s failed", shadow)
 				}
 			}
 		}

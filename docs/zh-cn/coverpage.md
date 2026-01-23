@@ -7,5 +7,5 @@
 - **本地** ⇋ **集群**
 -（使用KT双向通道）
 
-[Github](https://github.com/alibaba/kt-connect)
+[Github](https://github.com/gitlayzer/kt-connect)
 [快速开始](zh-cn/guide/quickstart)

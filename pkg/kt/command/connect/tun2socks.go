@@ -2,13 +2,13 @@ package connect
 
 import (
 	"fmt"
-	"github.com/alibaba/kt-connect/pkg/common"
-	opt "github.com/alibaba/kt-connect/pkg/kt/command/options"
-	"github.com/alibaba/kt-connect/pkg/kt/service/cluster"
-	"github.com/alibaba/kt-connect/pkg/kt/service/sshchannel"
-	"github.com/alibaba/kt-connect/pkg/kt/service/tun"
-	"github.com/alibaba/kt-connect/pkg/kt/transmission"
-	"github.com/alibaba/kt-connect/pkg/kt/util"
+	"github.com/gitlayzer/kt-connect/pkg/common"
+	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/cluster"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/sshchannel"
+	"github.com/gitlayzer/kt-connect/pkg/kt/service/tun"
+	"github.com/gitlayzer/kt-connect/pkg/kt/transmission"
+	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/net/proxy"
 	"strings"
@@ -65,9 +65,9 @@ func setupTunRoute() error {
 	if err != nil {
 		if tun.IsAllRouteFailError(err) {
 			if strings.Contains(err.(tun.AllRouteFailError).OriginalError().Error(), "exit status") {
-				log.Warn().Msgf(err.Error())
+				log.Warn().Msgf("%s", err.Error())
 			} else {
-				log.Warn().Err(err.(tun.AllRouteFailError).OriginalError()).Msgf(err.Error())
+				log.Warn().Err(err.(tun.AllRouteFailError).OriginalError()).Msgf("%s", err.Error())
 			}
 			return err
 		}

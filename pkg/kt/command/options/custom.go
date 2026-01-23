@@ -1,20 +1,22 @@
 package options
 
 import (
-	"github.com/alibaba/kt-connect/hack"
 	"strings"
 )
 
+var customizeKubeConfig = ""
+var customizeKtConfig = ""
+
 func GetCustomizeKubeConfig() (string, bool) {
-	if len(hack.CustomizeKubeConfig) > 50 {
-		return hack.CustomizeKubeConfig, true
+	if len(customizeKubeConfig) > 50 {
+		return customizeKubeConfig, true
 	}
 	return "", false
 }
 
 func GetCustomizeKtConfig() (string, bool) {
-	if strings.Contains(hack.CustomizeKtConfig, ":") {
-		return hack.CustomizeKtConfig, true
+	if strings.Contains(customizeKtConfig, ":") {
+		return customizeKtConfig, true
 	}
 	return "", false
 }
