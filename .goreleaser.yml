@@ -1,6 +1,6 @@
 # Make sure to check the documentation at http://goreleaser.com
 env:
-  - GO_VERSION=1.18
+  - CGO_ENABLED=0
 before:
   hooks:
     - make mod
@@ -34,22 +34,15 @@ builds:
       - linux
     goarch:
       - amd64
-  - id: "navigator"
-    main: ./cmd/navigator/main.go
-    binary: artifacts/navigator/navigator-linux-amd64
-    goos:
-      - linux
-    goarch:
-      - amd64
 dockers:
   - goos: linux
     goarch: amd64
     ids:
       - shadow
     image_templates:
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-shadow:latest"
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-shadow:{{ .Tag }}"
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-shadow:v{{ .Major }}"
+      - "layzer/kt-connect-shadow:latest"
+      - "layzer/kt-connect-shadow:{{ .Tag }}"
+      - "layzer/kt-connect-shadow:v{{ .Major }}"
     dockerfile: artifacts/docker/shadow/Dockerfile
     skip_push: false
     extra_files:
@@ -60,25 +53,13 @@ dockers:
     ids:
       - router
     image_templates:
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-router:latest"
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-router:{{ .Tag }}"
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-router:v{{ .Major }}"
+      - "layzer/kt-connect-router:latest"
+      - "layzer/kt-connect-router:{{ .Tag }}"
+      - "layzer/kt-connect-router:v{{ .Major }}"
     dockerfile: artifacts/docker/router/Dockerfile
     skip_push: false
     extra_files:
       - build/docker/router/nginx.conf
-  - goos: linux
-    goarch: amd64
-    ids:
-      - navigator
-    image_templates:
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-navigator:latest"
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-navigator:{{ .Tag }}"
-      - "registry.cn-hangzhou.aliyuncs.com/rdc-incubator/kt-connect-navigator:v{{ .Major }}"
-    dockerfile: artifacts/docker/navigator/Dockerfile
-    skip_push: false
-    extra_files:
-      - build/docker/navigator/setup_iptables.sh
 archives:
   - id: ktctl
     builds:

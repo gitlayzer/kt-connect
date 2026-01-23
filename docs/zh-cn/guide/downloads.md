@@ -5,15 +5,7 @@
 
 #### ** MacOS **
 
-推荐使用[Homebrew](https://brew.sh)工具一键安装：
-
-```bash
-brew install kt-connect
-```
-
----
-
-也可以手工下载最新软件包:
+手工下载最新软件包:
 
 * [MacOS x86 64位](https://github.com/gitlayzer/kt-connect/releases/download/v0.3.7/ktctl_0.3.7_MacOS_x86_64.tar.gz)
 * [MacOS ARM 64位](https://github.com/gitlayzer/kt-connect/releases/download/v0.3.7/ktctl_0.3.7_MacOS_arm_64.tar.gz)
