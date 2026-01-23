@@ -34,32 +34,6 @@ builds:
       - linux
     goarch:
       - amd64
-dockers:
-  - goos: linux
-    goarch: amd64
-    ids:
-      - shadow
-    image_templates:
-      - "layzer/kt-connect-shadow:latest"
-      - "layzer/kt-connect-shadow:{{ .Tag }}"
-      - "layzer/kt-connect-shadow:v{{ .Major }}"
-    dockerfile: artifacts/docker/shadow/Dockerfile
-    skip_push: false
-    extra_files:
-      - build/docker/shadow/run.sh
-      - build/docker/shadow/disconnect.sh
-  - goos: linux
-    goarch: amd64
-    ids:
-      - router
-    image_templates:
-      - "layzer/kt-connect-router:latest"
-      - "layzer/kt-connect-router:{{ .Tag }}"
-      - "layzer/kt-connect-router:v{{ .Major }}"
-    dockerfile: artifacts/docker/router/Dockerfile
-    skip_push: false
-    extra_files:
-      - build/docker/router/nginx.conf
 archives:
   - id: ktctl
     builds:
