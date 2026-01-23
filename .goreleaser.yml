@@ -23,7 +23,6 @@ archives:
     name_template: 'ktctl_{{ .Version }}_{{ .Os | title }}_{{ .Arch | replace "386" "i386" | replace "amd64" "x86_64" | replace "arm64" "aarch64" }}'
     formats:
       - tar.gz
-    allow_none: true
     # replacements is deprecated in v2, use name_template logic or other ways if needed, 
     # but for simple OS/Arch mapping, goreleaser v2 has standard mappings.
     # To keep custom naming, we can use title function or specific templates, 
