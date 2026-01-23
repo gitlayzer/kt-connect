@@ -1,4 +1,6 @@
+version: 2
 # Make sure to check the documentation at http://goreleaser.com
+project_name: kt-connect
 env:
   - CGO_ENABLED=0
 before:
