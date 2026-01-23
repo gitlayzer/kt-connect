@@ -1,49 +1,46 @@
 version: 2
-# Make sure to check the documentation at http://goreleaser.com
 project_name: kt-connect
-env:
-  - CGO_ENABLED=0
+
 before:
   hooks:
     - make mod
+
 builds:
-  - id: "ktctl"
+  - id: ktctl
     main: ./cmd/ktctl/main.go
     binary: ktctl
+    env:
+      - CGO_ENABLED=0
     goos:
       - linux
       - darwin
     goarch:
       - amd64
       - arm64
-    env:
-      - CGO_ENABLED=0
+
 archives:
-  - id: ktctl
-    name_template: 'ktctl_{{ .Version }}_{{ .Os | title }}_{{ .Arch | replace "386" "i386" | replace "amd64" "x86_64" | replace "arm64" "aarch64" }}'
-    formats:
+  - formats:
       - tar.gz
-    # replacements is deprecated in v2, use name_template logic or other ways if needed, 
-    # but for simple OS/Arch mapping, goreleaser v2 has standard mappings.
-    # To keep custom naming, we can use title function or specific templates, 
-    # but replacements field itself is removed from archives.
+    # 使用简洁的标准命名，避免复杂的替换导致冲突
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+
 checksum:
-  name_template: '{{ .Tag }}_checksums.txt'
+  name_template: 'checksums.txt'
+
 snapshot:
-  version_template: "SNAPSHOT"
+  version_template: "{{ .Tag }}-next"
+
 changelog:
   sort: asc
   filters:
     exclude:
       - '^docs:'
-      - '^config:'
-      - '^refactor:'
+      - '^test:'
+      - '^chore:'
+
 release:
   github:
     owner: gitlayzer
     name: kt-connect
-  ids:
-    - ktctl
-  # @see https://github.com/goreleaser/goreleaser/issues/1023
   draft: false
   prerelease: auto
