@@ -6,7 +6,6 @@ env:
 before:
   hooks:
     - make mod
-    - bash build/scripts/wintun.sh
 builds:
   - id: "ktctl"
     main: ./cmd/ktctl/main.go
@@ -14,7 +13,6 @@ builds:
     goos:
       - linux
       - darwin
-      - windows
     goarch:
       - amd64
       - arm64
@@ -25,10 +23,6 @@ archives:
     name_template: 'ktctl_{{ .Version }}_{{ .Os | title }}_{{ .Arch | replace "386" "i386" | replace "amd64" "x86_64" | replace "arm64" "arm_64" }}'
     formats:
       - tar.gz
-    format_overrides:
-      - goos: windows
-        formats:
-          - zip
     files:
       - src: 'artifacts/{{ .Os }}/{{ .Arch }}/*'
         dst: .
