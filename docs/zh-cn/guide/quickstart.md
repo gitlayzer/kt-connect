@@ -50,24 +50,9 @@ $ sudo ktctl connect
 00:00AM INF ---------------------------------------------------------------
 ```
 
-#### ** Windows **
-
-在Windows下可以在CMD或PowerShell图标上右键，点击"以管理员身份运行"，然后在打开的窗口里执行：
-
-```bash
-> ktctl connect
-00:00AM INF KtConnect start at <PID>
-... ...
-00:00AM INF ---------------------------------------------------------------
-00:00AM INF  All looks good, now you can access to resources in the kubernetes cluster
-00:00AM INF ---------------------------------------------------------------
-```
-
 <!-- tabs:end -->
 
 现在本地已经能够直接访问集群资源了，可通过浏览器或`curl`命令来验证：
-
-> 注意：在Windows PowerShell中，`curl`是一个内置命令，输出格式与下述示例有所不同，可用`curl.exe`替代命令中的`curl`
 
 ```bash
 $ curl http://10.51.0.162:8080    # 在本地直接访问PodIP

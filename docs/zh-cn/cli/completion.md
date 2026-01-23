@@ -1,12 +1,11 @@
 Ktctl Completion
 ---
 
-为`ktctl`工具开启命令和参数的`Tab键`自动补全功能。包含4个子命令：
+为`ktctl`工具开启命令和参数的`Tab键`自动补全功能。包含3个子命令：
 
 - bash        生成Bash的自动补全配置
 - zsh         生成Zsh的自动补全配置
 - fish        生成Fish的自动补全配置
-- powershell  生成PowerShell的自动补全配置
 
 详细使用方法如下：
 
@@ -57,22 +56,6 @@ ktctl completion fish | source
 ```bash
 ktctl completion fish > ~/.config/fish/completions/ktctl.fish
 ```
-
-#### ** powershell **
-
-仅对当前命令行窗口生效：
-
-```bash
-ktctl completion powershell | Out-String | Invoke-Expression
-```
-
-如果希望对所有窗口均有效，需要将以下命令生成的文本内容添加到PowerShell的Profile中：
-
-```bash
-ktctl completion powershell
-```
-
-> 关于如何使用PowerShell的Profile，详见[PowerShell文档](https://docs.microsoft.com/en-us/powershell/scripting/windows-powershell/ise/how-to-use-profiles-in-windows-powershell-ise)
 
 <!-- tabs:end -->
 

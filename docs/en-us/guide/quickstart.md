@@ -49,24 +49,9 @@ $ sudo ktctl connect
 00:00AM INF ---------------------------------------------------------------
 ```
 
-#### ** Windows **
-
-On Windows, execute `ktctl connect` command in terminal (If you are not login as Administrator, you should right-click on CMD and PowerShell icon, choose "Run as Administrator" to open a terminal):
-
-```bash
-> ktctl connect
-00:00AM INF KtConnect start at <PID>
-... ...
-00:00AM INF ---------------------------------------------------------------
-00:00AM INF  All looks good, now you can access to resources in the kubernetes cluster
-00:00AM INF ---------------------------------------------------------------
-```
-
 <!-- tabs:end -->
 
 Now any resource in the cluster can be directly accessed from local, you could use `curl` or web browser to verify.
-
-> Note：In **Windows PowerShell**, the `curl` tool is conflict with a build-in command, please type `curl.exe` instead of `curl`.
 
 ```bash
 $ curl http://10.51.0.162:8080    # access Pod IP from local

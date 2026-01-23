@@ -51,54 +51,32 @@ TAG=0.3.7 make ktctl
 make upx
 ````
 
-After execution, binary files for MacOS/Linux/Windows systems will be generated in the `artifacts` directory at one time.
-
-The Make toolkit in the Windows environment is relatively cumbersome to use, it is recommended to use below raw commands to create the executable binary.
+After execution, binary files for MacOS/Linux systems will be generated in the `artifacts` directory at one time.
 
 For more precise compilation control, you can also directly use the `go` and `upx` commands to complete the packaging. For more details, please refer to the `ktctl` and `upx` tasks in [Makefile](https://github.com/gitlayzer/kt-connect/blob/master/Makefile).
 
 It contains three configurable variables:
 
 - `TAG`: It is recommended to be consistent with the latest release version of kt-connect, unless you have customized both `global.image` and `mesh.router-image` configurations to the internal image address of the enterprise, otherwise using an unofficial version of the `TAG` value will cause `ktctl` fail to pull required image.
-- `GOARCH`: The target processor type for compilation, common values are: `386` (32-bit CPU) / `amd64` (64-bit CPU) / `arm64` (64-bit ARM CPU), etc.
-- `GOOS`: The target operating system for compilation, common values are: `darwin` (MacOS) / `linux` (Linux) / `windows` (Windows), etc.
+- `GOARCH`: The target processor type for compilation, common values are: `amd64` (64-bit CPU) / `arm64` (64-bit ARM CPU), etc.
+- `GOOS`: The target operating system for compilation, common values are: `darwin` (MacOS) / `linux` (Linux), etc.
 
-For example, compile the binary execution file of Windows 64bit environment:
+For example, compile the binary execution file of Linux 64bit environment:
 
 <!-- tabs:start -->
 
-#### ** MacOS Shell / Linux Shell / Windows MINGW **
+#### ** MacOS Shell / Linux Shell **
 
 ```bash
 export TAG=0.3.7
 export GOARCH=amd64
-export GOOS=windows
+export GOOS=linux
 go mod download
-go build -ldflags "-s -w -X main.version=${TAG}" -o artifacts/windows/ktctl.exe ./cmd/ktctl
-upx -9 artifacts/windows/ktctl.exe
+go build -ldflags "-s -w -X main.version=${TAG}" -o artifacts/linux/ktctl ./cmd/ktctl
+upx -9 artifacts/linux/ktctl
 ````
 
-#### ** Windows CMD **
-
-```bash
-set TAG=0.3.7
-set GOARCH=amd64
-set GOOS=windows
-go mod download
-go build -ldflags "-s -w -X main.version=%TAG%" -o artifacts\windows\ktctl.exe .\cmd\ktctl
-upx -9 artifacts\windows\ktctl.exe
-````
-
-#### ** Windows PowerShell **
-
-```bash
-$env:TAG="0.3.7"
-$env:GOARCH="amd64"
-$env:GOOS="windows"
-go mod download
-go build -ldflags "-s -w -X main.version=$env:TAG" -o artifacts\windows\ktctl.exe .\cmd\ktctl
-upx -9 artifacts\windows\ktctl.exe
-````
+<!-- tabs:end -->
 
 <!-- tabs:end -->
 

@@ -51,54 +51,32 @@ TAG=0.3.7 make ktctl
 make upx
 ```
 
-执行后将在`artifacts`目录下一次性生成MacOS/Linux/Windows系统所用的二进制文件。
-
-Windows环境下的Make工具使用起来相对繁琐，建议采用下述原始命令方式打包。
+执行后将在`artifacts`目录下一次性生成MacOS/Linux系统所用的二进制文件。
 
 如需进行更精细的编译控制，也可以直接使用`go`和`upx`命令来完成打包，具体命令可以参考[Makefile](https://github.com/gitlayzer/kt-connect/blob/master/Makefile)中的`ktctl`和`upx`任务。
 
 其中包含三个配置变量：
 
 - `TAG`：建议与kt-connect的最新发行版本保持一致，除非您已经将`global.image`和`mesh.router-image`配置都定制为了企业内部镜像地址，否则使用非正式版本的`TAG`值会导致运行时无法拉取所需的镜像。
-- `GOARCH`：编译的目标处理器类型，常用值为：`386`（32位CPU） / `amd64`（64位CPU） / `arm64`（64位ARM CPU）等
-- `GOOS`：编译包的目标系统，常用值为：`darwin`（MacOS） / `linux`（Linux） / `windows`（Windows）等
+- `GOARCH`：编译的目标处理器类型，常用值为：`amd64`（64位CPU） / `arm64`（64位ARM CPU）等
+- `GOOS`：编译包的目标系统，常用值为：`darwin`（MacOS） / `linux`（Linux）等
 
-以打64位Windows环境的二进制包为例：
+以打64位Linux环境的二进制包为例：
 
 <!-- tabs:start -->
 
-#### ** MacOS Shell / Linux Shell / Windows MINGW **
+#### ** MacOS Shell / Linux Shell **
 
 ```bash
 export TAG=0.3.7
 export GOARCH=amd64
-export GOOS=windows
+export GOOS=linux
 go mod download
-go build -ldflags "-s -w -X main.version=${TAG}" -o artifacts/windows/ktctl.exe ./cmd/ktctl
-upx -9 artifacts/windows/ktctl.exe
+go build -ldflags "-s -w -X main.version=${TAG}" -o artifacts/linux/ktctl ./cmd/ktctl
+upx -9 artifacts/linux/ktctl
 ```
 
-#### ** Windows CMD **
-
-```bash
-set TAG=0.3.7
-set GOARCH=amd64
-set GOOS=windows
-go mod download
-go build -ldflags "-s -w -X main.version=%TAG%" -o artifacts\windows\ktctl.exe .\cmd\ktctl
-upx -9 artifacts\windows\ktctl.exe
-```
-
-#### ** Windows PowerShell **
-
-```bash
-$env:TAG="0.3.7"
-$env:GOARCH="amd64"
-$env:GOOS="windows"
-go mod download
-go build -ldflags "-s -w -X main.version=$env:TAG" -o artifacts\windows\ktctl.exe .\cmd\ktctl
-upx -9 artifacts\windows\ktctl.exe
-```
+<!-- tabs:end -->
 
 <!-- tabs:end -->
 
