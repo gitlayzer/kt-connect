@@ -1,7 +1,7 @@
 # Download and unzip wintun libraries
 
 mkdir -p artifacts
-wget -O artifacts/wintun.zip https://www.wintun.net/builds/wintun-0.14.1.zip
+curl -L --fail --retry 3 --connect-timeout 10 -o artifacts/wintun.zip https://www.wintun.net/builds/wintun-0.14.1.zip
 
 rm -fr artifacts/Windows
 unzip -d artifacts/Windows artifacts/wintun.zip
