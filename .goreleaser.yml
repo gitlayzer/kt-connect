@@ -41,10 +41,12 @@ archives:
     builds:
       - ktctl
     name_template: 'ktctl_{{ .Version }}_{{ .Os | title }}_{{ .Arch | replace "386" "i386" | replace "amd64" "x86_64" | replace "arm64" "arm_64" }}'
-    format: tar.gz
+    formats:
+      - tar.gz
     format_overrides:
       - goos: windows
-        format: zip
+        formats:
+          - zip
     files:
       - src: 'artifacts/{{ .Os }}/{{ .Arch }}/*'
         dst: .
@@ -56,7 +58,7 @@ archives:
 checksum:
   name_template: '{{ .Tag }}_checksums.txt'
 snapshot:
-  name_template: "SNAPSHOT"
+  version_template: "SNAPSHOT"
 changelog:
   sort: asc
   filters:
@@ -66,7 +68,7 @@ changelog:
       - '^refactor:'
 release:
   github:
-    owner: alibaba
+    owner: gitlayzer
     name: kt-connect
   ids:
     - ktctl
