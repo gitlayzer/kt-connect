@@ -1,13 +1,9 @@
 KT-Connect
 ===========
 
-![Go](https://github.com/gitlayzer/kt-connect/workflows/Go/badge.svg)
-[![Build Status](https://travis-ci.org/gitlayzer/kt-connect.svg?branch=master)](https://travis-ci.org/gitlayzer/kt-connect)
-[![Go Report Card](https://goreportcard.com/badge/github.com/gitlayzer/kt-connect)](https://goreportcard.com/report/github.com/gitlayzer/kt-connect)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/test_coverage)](https://codeclimate.com/github/gitlayzer/kt-connect/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/eb13b3946784bd7c67cc/maintainability)](https://codeclimate.com/github/gitlayzer/kt-connect/maintainability)
 [![Release](https://img.shields.io/github/release/gitlayzer/kt-connect.svg?style=flat-square)](https://img.shields.io/github/release/gitlayzer/kt-connect.svg?style=flat-square)
 ![License](https://img.shields.io/github/license/gitlayzer/kt-connect.svg)
+
 
 [English](./README.md) | 简体中文
 
