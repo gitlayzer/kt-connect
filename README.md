@@ -17,6 +17,8 @@ KtConnect ("Kt" is short for "Kubernetes Toolkit") is a utility tool to help you
 * `Exchange`: Developer can exchange the workload to redirect the requests to a local app.
 * `Mesh`: You can create a mesh version service in local host, and redirect specified workload requests to your local.
 * `Preview`: Expose a local running app to Kubernetes cluster as a common service, all requests to that service are redirect to local app.
+* `Traffic Mirror & Replay`: Mirror traffic from exchange/mesh to a target or log files, then replay requests locally.
+* `Config Profiles`: Save and reuse configuration defaults for common workflows across clusters or namespaces.
 
 ## 🚀 QuickStart
 
@@ -27,4 +29,3 @@ Read the [Quick Start Guide](docs/en-us/guide/quickstart.md) for more about this
 ## 💡 Ask For Help
 
 Please feel free to raise an [issue](https://github.com/gitlayzer/kt-connect/issues) if anything sucks.
-
