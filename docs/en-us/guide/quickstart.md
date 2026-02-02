@@ -85,6 +85,35 @@ KtConnect offers 2 commands for accessing local service from cluster in differen
 - Exchange：redirect all request to specified service in cluster to local
 - Mesh：redirect partial request to specified service in cluster (base on mesh rule) to local
 
+## Profiles
+
+If you frequently switch between clusters or namespaces, use configuration profiles to save defaults for connect, exchange, mesh, and preview commands. The active profile is applied as the first choice for default parameters.
+
+Create a profile:
+
+```bash
+$ ktctl config profile add dev \
+  --kube-context my-cluster \
+  --namespace default \
+  --proxy-mode tun2socks \
+  --exchange-mode selector \
+  --mesh-mode auto \
+  --preview-external
+```
+
+List and activate profiles:
+
+```bash
+$ ktctl config profile list
+$ ktctl config profile use dev
+```
+
+Remove a profile when it is no longer needed:
+
+```bash
+$ ktctl config profile delete dev
+```
+
 <!-- tabs:start -->
 
 #### ** Exchange Command **

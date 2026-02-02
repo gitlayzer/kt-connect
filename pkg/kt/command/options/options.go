@@ -140,6 +140,9 @@ func Get() *DaemonOptions {
 		if configData, err := ioutil.ReadFile(util.KtConfigFile); err == nil {
 			mergeOptions(opt, configData)
 		}
+		if profile, err := LoadCurrentProfile(); err == nil {
+			ApplyProfileDefaults(opt, profile)
+		}
 	}
 	return opt
 }
