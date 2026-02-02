@@ -24,9 +24,3 @@ KtConnect实现了开发者本地运行的服务与Kubernetes集群中的服务�
 * 支持Windows/MacOS/Linux开发环境
 
 不同的操作系统，相同的使用方式，让所有开发者轻松共享Kubernetes网络互通的便利
-
-## 联系我们
-
-请加入`kt-dev`钉钉群：
-
-<img src="https://img.alicdn.com/imgextra/i4/O1CN01sTW3D61NzAFgUCNqz_!!6000000001640-0-tps-573-657.jpg" width="30%"></img>
