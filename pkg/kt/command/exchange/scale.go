@@ -5,6 +5,7 @@ import (
 	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
 	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
 	"github.com/gitlayzer/kt-connect/pkg/kt/service/cluster"
+	"github.com/gitlayzer/kt-connect/pkg/kt/transmission"
 	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	appV1 "k8s.io/api/apps/v1"
@@ -24,8 +25,14 @@ func ByScale(resourceName string) error {
 	shadowPodName := app.Name + util.ExchangePodInfix + strings.ToLower(util.RandomString(5))
 
 	log.Info().Msgf("Creating exchange shadow %s in namespace %s", shadowPodName, opt.Get().Global.Namespace)
+	mirror := transmission.MirrorConfig{
+		Target:      opt.Get().Exchange.MirrorTarget,
+		SampleRate:  opt.Get().Exchange.MirrorSampleRate,
+		RedactRules: opt.Get().Exchange.MirrorRedactRules,
+		LogPath:     opt.Get().Exchange.MirrorLogPath,
+	}
 	if err = general.CreateShadowAndInbound(shadowPodName, opt.Get().Exchange.Expose,
-		getExchangeLabels(app), getExchangeAnnotation(), map[int]string{}); err != nil {
+		getExchangeLabels(app), getExchangeAnnotation(), map[int]string{}, mirror); err != nil {
 		return err
 	}
 
