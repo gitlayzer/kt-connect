@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gitlayzer/kt-connect/pkg/kt/command/general"
 	opt "github.com/gitlayzer/kt-connect/pkg/kt/command/options"
+	"github.com/gitlayzer/kt-connect/pkg/kt/transmission"
 	"github.com/gitlayzer/kt-connect/pkg/kt/util"
 	"github.com/rs/zerolog/log"
 	"strings"
@@ -20,7 +21,7 @@ func BySelector(resourceName string) error {
 	}
 
 	// Lock service to avoid conflict, must be first step
-	svc, err = general.LockService(svc.Name, opt.Get().Global.Namespace, 0);
+	svc, err = general.LockService(svc.Name, opt.Get().Global.Namespace, 0)
 	if err != nil {
 		return err
 	}
@@ -47,8 +48,14 @@ func BySelector(resourceName string) error {
 	annotation := map[string]string{
 		util.KtConfig: fmt.Sprintf("service=%s", svc.Name),
 	}
+	mirror := transmission.MirrorConfig{
+		Target:      opt.Get().Exchange.MirrorTarget,
+		SampleRate:  opt.Get().Exchange.MirrorSampleRate,
+		RedactRules: opt.Get().Exchange.MirrorRedactRules,
+		LogPath:     opt.Get().Exchange.MirrorLogPath,
+	}
 	if err = general.CreateShadowAndInbound(shadowName, opt.Get().Exchange.Expose,
-		shadowLabels, annotation, general.GetTargetPorts(svc)); err != nil {
+		shadowLabels, annotation, general.GetTargetPorts(svc), mirror); err != nil {
 		return err
 	}
 

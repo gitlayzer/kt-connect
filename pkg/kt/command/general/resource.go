@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-func CreateShadowAndInbound(shadowPodName, portsToExpose string, labels, annotations map[string]string, portNameDict map[int]string) error {
+func CreateShadowAndInbound(shadowPodName, portsToExpose string, labels, annotations map[string]string, portNameDict map[int]string, mirror transmission.MirrorConfig) error {
 
 	envs := make(map[string]string)
 	_, podName, privateKeyPath, err := cluster.Ins().GetOrCreateShadow(shadowPodName, labels, annotations, envs, portsToExpose, portNameDict)
@@ -24,7 +24,7 @@ func CreateShadowAndInbound(shadowPodName, portsToExpose string, labels, annotat
 		return err
 	}
 
-	if _, err = transmission.ForwardPodToLocal(portsToExpose, podName, privateKeyPath); err != nil {
+	if _, err = transmission.ForwardPodToLocal(portsToExpose, podName, privateKeyPath, mirror); err != nil {
 		return err
 	}
 	return nil

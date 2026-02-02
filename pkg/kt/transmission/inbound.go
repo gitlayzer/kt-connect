@@ -11,7 +11,7 @@ import (
 )
 
 // ForwardPodToLocal mapping pod port to local port
-func ForwardPodToLocal(exposePorts, podName, privateKey string) (int, error) {
+func ForwardPodToLocal(exposePorts, podName, privateKey string, mirror MirrorConfig) (int, error) {
 	log.Info().Msgf("Forwarding pod %s to local via port %s", podName, exposePorts)
 	localSshPort := util.GetRandomTcpPort()
 
@@ -20,7 +20,7 @@ func ForwardPodToLocal(exposePorts, podName, privateKey string) (int, error) {
 		return -1, err
 	}
 
-	err := ForwardRemotePortsViaSshTunnel(exposePorts, localSshPort, privateKey)
+	err := ForwardRemotePortsViaSshTunnel(exposePorts, localSshPort, privateKey, mirror)
 	if err != nil {
 		return -1, err
 	}
@@ -29,7 +29,7 @@ func ForwardPodToLocal(exposePorts, podName, privateKey string) (int, error) {
 }
 
 // ForwardRemotePortsViaSshTunnel forward multiple remote ports to local
-func ForwardRemotePortsViaSshTunnel(exposePorts string, localSshPort int, privateKey string) error {
+func ForwardRemotePortsViaSshTunnel(exposePorts string, localSshPort int, privateKey string, mirror MirrorConfig) error {
 	// supports multi port-pairs
 	portPairs := strings.Split(exposePorts, ",")
 	res := make(chan error)
@@ -38,7 +38,16 @@ func ForwardRemotePortsViaSshTunnel(exposePorts string, localSshPort int, privat
 		if err2 != nil {
 			return err2
 		}
-		forwardRemotePortViaSshTunnel(localPort, remotePort, localSshPort, privateKey, res)
+		targetPort := remotePort
+		if mirror.Enabled() {
+			mirror.LocalAddress = fmt.Sprintf("127.0.0.1:%d", localPort)
+			proxyPort, err := StartMirrorProxy(localPort, mirror)
+			if err != nil {
+				return err
+			}
+			targetPort = proxyPort
+		}
+		forwardRemotePortViaSshTunnel(localPort, targetPort, localSshPort, privateKey, res)
 	}
 	select {
 	case err := <-res:
@@ -67,7 +76,7 @@ func sshReverseTunnel(privateKey, remoteEndpoint, localEndpoint, sshAddress stri
 		if err != nil {
 			if res != nil {
 				log.Error().Err(err).Msgf("Failed to setup reverse tunnel")
-				res <-err
+				res <- err
 			} else {
 				log.Debug().Err(err).Msgf("Reverse tunnel interrupted")
 			}

@@ -32,23 +32,37 @@ type ConnectOptions struct {
 
 // ExchangeOptions ...
 type ExchangeOptions struct {
-	Mode             string
-	Expose           string
-	RecoverWaitTime  int
-	SkipPortChecking bool
+	Mode              string
+	Expose            string
+	RecoverWaitTime   int
+	SkipPortChecking  bool
+	MirrorTarget      string
+	MirrorSampleRate  int
+	MirrorRedactRules string
+	MirrorLogPath     string
 }
 
 // MeshOptions ...
 type MeshOptions struct {
-	Mode             string
-	Expose           string
-	VersionMark      string
-	RouterImage      string
-	SkipPortChecking bool
+	Mode              string
+	Expose            string
+	VersionMark       string
+	RouterImage       string
+	SkipPortChecking  bool
+	MirrorTarget      string
+	MirrorSampleRate  int
+	MirrorRedactRules string
+	MirrorLogPath     string
 }
 
 // RecoverOptions ...
 type RecoverOptions struct {
+}
+
+// ReplayOptions ...
+type ReplayOptions struct {
+	LogPath string
+	Target  string
 }
 
 // PreviewOptions ...
@@ -111,6 +125,7 @@ type DaemonOptions struct {
 	Preview  *PreviewOptions
 	Forward  *ForwardOptions
 	Recover  *RecoverOptions
+	Replay   *ReplayOptions
 	Clean    *CleanOptions
 	Config   *ConfigOptions
 	Birdseye *BirdseyeOptions
@@ -130,6 +145,7 @@ func Get() *DaemonOptions {
 			Preview:  &PreviewOptions{},
 			Forward:  &ForwardOptions{},
 			Recover:  &RecoverOptions{},
+			Replay:   &ReplayOptions{},
 			Clean:    &CleanOptions{},
 			Birdseye: &BirdseyeOptions{},
 			Config:   &ConfigOptions{},

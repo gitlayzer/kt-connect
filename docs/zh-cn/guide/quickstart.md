@@ -234,6 +234,24 @@ $ curl http://tomcat-v2:8080
 kt-connect local v2
 ```
 
+#### ** 流量镜像与回放 **
+
+你可以在 `exchange` 或 `mesh` 过程中将请求流量镜像到另一个地址，并把请求日志落盘，便于排查问题或在本地回放流量。
+
+```bash
+$ ktctl exchange tomcat --expose 8080 \
+  --mirror-target 127.0.0.1:18080 \
+  --mirror-sample-rate 50 \
+  --mirror-redact-rules 'Authorization=.*=Authorization=***' \
+  --mirror-log-path ./mirror-logs
+```
+
+将镜像日志回放到本地服务：
+
+```bash
+$ ktctl replay --log-path ./mirror-logs --target 127.0.0.1:8080
+```
+
 #### ** Forward命令 **
 
 将任意IP或集群中的服务映射到本地的指定端口。用于在测试时，使用`localhost`地址便捷的访问集群中的特定IP或服务，典型场景是是访问其他开发者通过Preview命令注册的本地服务。

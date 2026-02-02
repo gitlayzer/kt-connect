@@ -236,6 +236,24 @@ $ curl http://tomcat-v2:8080
 kt-connect local v2
 ```
 
+#### ** Traffic Mirroring & Replay **
+
+You can mirror the traffic that flows into `exchange` or `mesh` to another address and persist request payloads to disk. This is helpful for debugging or for replaying traffic against a local service.
+
+```bash
+$ ktctl exchange tomcat --expose 8080 \
+  --mirror-target 127.0.0.1:18080 \
+  --mirror-sample-rate 50 \
+  --mirror-redact-rules 'Authorization=.*=Authorization=***' \
+  --mirror-log-path ./mirror-logs
+```
+
+Replay mirrored logs to your local service:
+
+```bash
+$ ktctl replay --log-path ./mirror-logs --target 127.0.0.1:8080
+```
+
 #### ** Forward Command **
 
 Redirect specified local port to any IP or service in the cluster. It is used to easily access a specific IP or service in the cluster using the `localhost` address during testing. The typical scenario is to access local services of other developers registered by `preview` command.
