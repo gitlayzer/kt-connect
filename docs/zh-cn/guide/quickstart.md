@@ -85,6 +85,35 @@ KtConnect提供了两种能够让集群流量重定向到本地服务的命令�
 - Exchange：将集群指定服务的所有流量转向本地
 - Mesh：将集群指定服务的部分流量（按Header或Label规则）转向本地
 
+## Profiles 配置
+
+如果需要在多个集群或命名空间间频繁切换，可以使用 Profile 保存 connect / exchange / mesh / preview 的默认参数。当前 Profile 会优先作为默认值加载。
+
+创建 Profile：
+
+```bash
+$ ktctl config profile add dev \
+  --kube-context my-cluster \
+  --namespace default \
+  --proxy-mode tun2socks \
+  --exchange-mode selector \
+  --mesh-mode auto \
+  --preview-external
+```
+
+列出并切换 Profile：
+
+```bash
+$ ktctl config profile list
+$ ktctl config profile use dev
+```
+
+删除 Profile：
+
+```bash
+$ ktctl config profile delete dev
+```
+
 <!-- tabs:start -->
 
 #### ** Exchange命令 **
