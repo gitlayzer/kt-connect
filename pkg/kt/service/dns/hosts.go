@@ -12,6 +12,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
+	"sync/atomic"
 	"time"
 )
 
@@ -19,11 +20,11 @@ const ktHostsEscapeBegin = "# Kt Hosts Begin"
 const ktHostsEscapeEnd = "# Kt Hosts End"
 
 // TODO: this is a temporary solution to avoid dumping after cleanup triggered
-var doNotDump = false
+var doNotDump atomic.Bool
 
 // DropHosts remove hosts domain record added by kt
 func DropHosts() {
-	doNotDump = true
+	doNotDump.Store(true)
 	lines, err := loadHostsFile()
 	if err != nil {
 		log.Error().Err(err).Msgf("Failed to load hosts file")
@@ -46,7 +47,7 @@ func DropHosts() {
 
 // DumpHosts dump service domain to hosts file
 func DumpHosts(hostsMap map[string]string, namespaceToDrop string) error {
-	if doNotDump {
+	if doNotDump.Load() {
 		return nil
 	}
 	lines, err := loadHostsFile()
@@ -126,14 +127,12 @@ func dumpHosts(hostsMap map[string]string, linesToKeep []string) []string {
 }
 
 func mergeLines(linesBefore []string, linesAfter []string) []string {
-	lines := make([]string, len(linesBefore)+len(linesAfter)+2)
-	posBegin := len(linesBefore)
-	if posBegin > 0 {
-		copy(lines[0:posBegin], linesBefore[:])
+	lines := make([]string, 0, len(linesBefore)+len(linesAfter)+1)
+	lines = append(lines, linesBefore...)
+	if len(linesBefore) > 0 && len(linesAfter) > 0 {
+		lines = append(lines, "")
 	}
-	if len(linesAfter) > 0 {
-		copy(lines[posBegin+1:len(lines)-1], linesAfter[:])
-	}
+	lines = append(lines, linesAfter...)
 	return lines
 }
 
@@ -157,9 +156,9 @@ func loadHostsFile() ([]string, error) {
 
 func updateHostsFile(lines []string) error {
 	lock := flock.New(fmt.Sprintf("%s/hosts.lock", util.KtLockDir))
-	timeoutContext, cancel := context.WithTimeout(context.TODO(), 2 * time.Second)
+	timeoutContext, cancel := context.WithTimeout(context.TODO(), 2*time.Second)
 	defer cancel()
-	if ok, err := lock.TryLockContext(timeoutContext, 100 * time.Millisecond); !ok {
+	if ok, err := lock.TryLockContext(timeoutContext, 100*time.Millisecond); !ok {
 		return fmt.Errorf("failed to require hosts lock")
 	} else if err != nil {
 		log.Error().Err(err).Msgf("require hosts file failed with error")

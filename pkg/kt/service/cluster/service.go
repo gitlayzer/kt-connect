@@ -8,6 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	labelApi "k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/types"
+	"time"
 )
 
 // SvcMetaAndSpec ...
@@ -20,7 +21,9 @@ type SvcMetaAndSpec struct {
 
 // GetService get service
 func (k *Kubernetes) GetService(name, namespace string) (*coreV1.Service, error) {
-	return k.Clientset.CoreV1().Services(namespace).Get(context.TODO(), name, metav1.GetOptions{})
+	ctx, cancel := apiContext()
+	defer cancel()
+	return k.Clientset.CoreV1().Services(namespace).Get(ctx, name, metav1.GetOptions{})
 }
 
 // GetServicesBySelector get services by selector
@@ -40,7 +43,9 @@ func (k *Kubernetes) GetServicesBySelector(matchLabels map[string]string, namesp
 
 // GetServicesByLabel get services by label
 func (k *Kubernetes) GetServicesByLabel(labels map[string]string, namespace string) (svcs *coreV1.ServiceList, err error) {
-	return k.Clientset.CoreV1().Services(namespace).List(context.TODO(), metav1.ListOptions{
+	ctx, cancel := apiContext()
+	defer cancel()
+	return k.Clientset.CoreV1().Services(namespace).List(ctx, metav1.ListOptions{
 		LabelSelector:  labelApi.SelectorFromSet(labels).String(),
 		TimeoutSeconds: &apiTimeout,
 	})
@@ -48,7 +53,9 @@ func (k *Kubernetes) GetServicesByLabel(labels map[string]string, namespace stri
 
 // GetAllServiceInNamespace get all services in specified namespace
 func (k *Kubernetes) GetAllServiceInNamespace(namespace string) (*coreV1.ServiceList, error) {
-	return k.Clientset.CoreV1().Services(namespace).List(context.TODO(), metav1.ListOptions{
+	ctx, cancel := apiContext()
+	defer cancel()
+	return k.Clientset.CoreV1().Services(namespace).List(ctx, metav1.ListOptions{
 		TimeoutSeconds: &apiTimeout,
 	})
 }
@@ -56,27 +63,35 @@ func (k *Kubernetes) GetAllServiceInNamespace(namespace string) (*coreV1.Service
 // CreateService create kubernetes service
 func (k *Kubernetes) CreateService(metaAndSpec *SvcMetaAndSpec) (*coreV1.Service, error) {
 	SetupHeartBeat(metaAndSpec.Meta.Name, metaAndSpec.Meta.Namespace, k.UpdateServiceHeartBeat)
+	ctx, cancel := apiContext()
+	defer cancel()
 	return k.Clientset.CoreV1().Services(metaAndSpec.Meta.Namespace).
-		Create(context.TODO(), createService(metaAndSpec), metav1.CreateOptions{})
+		Create(ctx, createService(metaAndSpec), metav1.CreateOptions{})
 }
 
 // UpdateService ...
 func (k *Kubernetes) UpdateService(svc *coreV1.Service) (*coreV1.Service, error) {
-	return k.Clientset.CoreV1().Services(svc.Namespace).Update(context.TODO(), svc, metav1.UpdateOptions{})
+	ctx, cancel := apiContext()
+	defer cancel()
+	return k.Clientset.CoreV1().Services(svc.Namespace).Update(ctx, svc, metav1.UpdateOptions{})
 }
 
 // RemoveService remove service
 func (k *Kubernetes) RemoveService(name, namespace string) (err error) {
 	deletePolicy := metav1.DeletePropagationBackground
-	return k.Clientset.CoreV1().Services(namespace).Delete(context.TODO(), name, metav1.DeleteOptions{
+	ctx, cancel := apiContext()
+	defer cancel()
+	return k.Clientset.CoreV1().Services(namespace).Delete(ctx, name, metav1.DeleteOptions{
 		PropagationPolicy: &deletePolicy,
 	})
 }
 
 func (k *Kubernetes) UpdateServiceHeartBeat(name, namespace string) {
 	key := "service_" + name
+	ctx, cancel := apiContext()
+	defer cancel()
 	if _, err := k.Clientset.CoreV1().Services(namespace).
-		Patch(context.TODO(), name, types.JSONPatchType, []byte(resourceHeartbeatPatch()), metav1.PatchOptions{}); err != nil {
+		Patch(ctx, name, types.JSONPatchType, []byte(resourceHeartbeatPatch()), metav1.PatchOptions{}); err != nil {
 		if healthy, exists := LastHeartBeatStatus.Get(key); healthy || !exists {
 			log.Warn().Err(err).Msgf("Failed to update heart beat of service %s", name)
 		} else {
@@ -87,6 +102,10 @@ func (k *Kubernetes) UpdateServiceHeartBeat(name, namespace string) {
 		log.Debug().Msgf("Heartbeat service %s ticked at %s", name, util.FormattedTime())
 		LastHeartBeatStatus.Set(key, true)
 	}
+}
+
+func apiContext() (context.Context, context.CancelFunc) {
+	return context.WithTimeout(context.Background(), time.Duration(apiTimeout)*time.Second)
 }
 
 // WatchService ...
