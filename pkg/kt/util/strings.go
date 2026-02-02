@@ -26,10 +26,10 @@ func RandomString(n int) string {
 
 // RandomSeconds Generate random duration number in second
 func RandomSeconds(min, max int) time.Duration {
-	val := rand.Intn(max)
-	if val < min {
-		val = min
+	if max <= min {
+		return time.Duration(min) * time.Second
 	}
+	val := rand.Intn(max-min+1) + min
 	return time.Duration(val) * time.Second
 }
 
